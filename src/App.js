@@ -1,21 +1,17 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Myform from './Myform'
+import { useForm, FormProvider } from 'react-hook-form';
 
 function App() {
+  const form = useForm({defaultValues:{firstName:""}});
+  const onSubmit = (data) =>console.log(data);
+  const onError = (data) =>console.log(data);
   return (
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <TextField id="filled-basic" label="Filled" variant="filled" />
-      <TextField id="standard-basic" label="Standard" variant="standard" />
-    </Box>
+   <FormProvider {...form}>
+    <form onSubmit={form.handleSubmit(onSubmit,onError)}>
+      <Myform />
+    </form>
+   </FormProvider>
   );
 }
 
